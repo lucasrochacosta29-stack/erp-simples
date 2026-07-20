@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>ERP Simples - Vendas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav style="margin-bottom: 20px;">
+        <a href="/produtos" style="margin-right: 15px;">Produtos</a>
+        <a href="/clientes" style="margin-right: 15px;">Clientes</a>
+        <a href="/vendas" style="margin-right: 15px;">Vendas</a>
+        <a href="/relatorio">Relatório</a>
+    </nav>
+
+    <h1>Vendas</h1>
+
+    <form action="/vendas/nova" method="POST">
+        <select name="produto_id" required>
+            <option value="">Selecione o produto</option>
+            {% for produto in produtos %}
+            <option value="{{ produto.id }}">{{ produto.nome }} (estoque: {{ produto.quantidade }})</option>
+            {% endfor %}
+        </select>
+
+        <select name="cliente_id" required>
+            <option value="">Selecione o cliente</option>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="quantidade" placeholder="Quantidade" min="1" required>
+        <button type="submit">Registrar venda</button>
+    </form>
+
+    <hr>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Produto</th>
+            <th>Cliente</th>
+            <th>Quantidade</th>
+            <th>Data</th>
+        </tr>
+        {% for venda in vendas %}
+        <tr>
+            <td>{{ venda.id }}</td>
+            <td>{{ venda.produto }}</td>
+            <td>{{ venda.cliente }}</td>
+            <td>{{ venda.quantidade }}</td>
+            <td>{{ venda.data }}</td>
+            <td>
+                <a href="/vendas/editar/{{ venda.id }}">Editar</a>
+                <form action="/vendas/excluir/{{ venda.id }}" method="POST" style="display:inline;">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>ERP Simples - Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav style="margin-bottom: 20px;">
+        <a href="/produtos" style="margin-right: 15px;">Produtos</a>
+        <a href="/clientes" style="margin-right: 15px;">Clientes</a>
+        <a href="/vendas" style="margin-right: 15px;">Vendas</a>
+        <a href="/relatorio">Relatório</a>
+    </nav>
+
+    <h1>Clientes</h1>
+
+    <form action="/clientes/novo" method="POST">
+        <input type="text" name="nome" placeholder="Nome do cliente" required>
+        <input type="text" name="contato" placeholder="Contato (telefone/email)">
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <hr>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Contato</th>
+        </tr>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.contato }}</td>
+            <td>
+                <a href="/clientes/editar/{{ cliente.id }}">Editar</a>
+                <form action="/clientes/excluir/{{ cliente.id }}" method="POST" style="display:inline;">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

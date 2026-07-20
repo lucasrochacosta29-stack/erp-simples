@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>ERP Simples - Editar Venda</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav style="margin-bottom: 20px;">
+        <a href="/produtos" style="margin-right: 15px;">Produtos</a>
+        <a href="/clientes" style="margin-right: 15px;">Clientes</a>
+        <a href="/vendas" style="margin-right: 15px;">Vendas</a>
+        <a href="/relatorio">Relatório</a>
+    </nav>
+
+    <h1>Editar Venda</h1>
+
+    <form action="/vendas/editar/{{ venda.id }}" method="POST">
+        <select name="produto_id" required>
+            {% for produto in produtos %}
+            <option value="{{ produto.id }}" {% if produto.id == venda.produto_id %}selected{% endif %}>{{ produto.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="cliente_id" required>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.id }}" {% if cliente.id == venda.cliente_id %}selected{% endif %}>{{ cliente.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="quantidade" value="{{ venda.quantidade }}" min="1" required>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
