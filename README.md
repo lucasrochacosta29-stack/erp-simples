@@ -62,7 +62,17 @@ http://127.0.0.1:5000
 
 ## Capturas de tela
 
-*(adicione aqui prints das telas de produtos, clientes, vendas e relatório)*
+### Produtos
+![Produtos](screenshots/produtos.png)
+
+### Clientes
+![Clientes](screenshots/clientes.png)
+
+### Vendas
+![Vendas](screenshots/vendas.png)
+
+### Relatório
+![Relatório](screenshots/relatorio.png)
 
 ## Autor
 
